@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, View, Text, Button, Alert} from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
 MapboxGL.setAccessToken(
@@ -9,46 +9,46 @@ MapboxGL.setAccessToken(
 const App = () => {
   const [coordinates, setCoordinates] = useState(null);
   const [selectedPoint, setSelectedPoint] = useState(null);
+  const [userLoc, setUserLoc] = useState(null);
+  const [zoomLevelVar, setZoomLevelVar] = useState(10);
 
   const onSelectPoint = event => {
     setCoordinates(event.geometry.coordinates);
     setSelectedPoint(event.properties.id);
+    // setZoomLevelVar();
+
   };
 
   return (
     <>
+
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <View style={styles.container}>
+          <Button title="Decrease" onPress={() => setZoomLevelVar(zoomLevelVar - 1)}/>
+          <Button title="Increase" onPress={() => setZoomLevelVar(zoomLevelVar + 1)}/>
           <MapboxGL.MapView
             style={styles.map}
+            zoomEnabled = {true}
             onPress={event => {
               setCoordinates(event.geometry.coordinates);
               setSelectedPoint(null);
             }}>
             <MapboxGL.Camera
-              zoomLevel={8}
-              centerCoordinate={[-94.5786, 39.0997]}
+              zoomLevel= {zoomLevelVar}
+              //removed centerCoordinate because followUserLocation now will put the center directly to where the user is.
+              // centerCoordinate={[-71.0589, 42.3601]}
+              followUserLocation = {true}
             />
             <MapboxGL.PointAnnotation
-              id="Jack Stack"
-              coordinate={[-94.585701, 39.087269]}
+              id="BU"
+              coordinate={[-71.100295, 42.3497]}
               onSelected={onSelectPoint}
             />
-            <MapboxGL.PointAnnotation
-              id="KC Joe's"
-              coordinate={[-94.769043, 38.911251]}
-              onSelected={onSelectPoint}
-            />
-            <MapboxGL.PointAnnotation
-              id="Smokehouse BBQ"
-              coordinate={[-94.66092, 39.24837]}
-              onSelected={onSelectPoint}
-            />
-            <MapboxGL.PointAnnotation
-              id="Slaps BBQ"
-              coordinate={[-94.624443, 39.102489]}
-              onSelected={onSelectPoint}
+            <MapboxGL.UserLocation
+              visible = {true}
+              showsUserHeadingLocation= {true}
+              renderMode = 'native'
             />
           </MapboxGL.MapView>
           {coordinates ? (
@@ -63,6 +63,8 @@ const App = () => {
           ) : null}
         </View>
       </SafeAreaView>
+
+
     </>
   );
 };
@@ -88,5 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+
 
 export default App;
