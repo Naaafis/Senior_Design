@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Food_scanner_and_calorie_counter",
+    "slug": "Food_scanner_and_calorie_counter",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./components/assets/icon.png",
+    "splash": {
+      "image": "./components/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./components/assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
