@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="d3b352f3-4e99-48b3-9125-a52a83732ece"
+    Name="42936dab-90ad-436f-9e33-e8b643f6f13c"
     Publisher="CN=chase"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="d3b352f3-4e99-48b3-9125-a52a83732ece" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="42936dab-90ad-436f-9e33-e8b643f6f13c" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>woof</DisplayName>

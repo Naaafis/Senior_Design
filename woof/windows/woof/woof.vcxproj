@@ -6,7 +6,7 @@
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{1889091e-3112-49b9-a5f5-3e761f9657b6}</ProjectGuid>
+    <ProjectGuid>{334b8cca-e974-443a-98dc-39c250d0bf71}</ProjectGuid>
     <ProjectName>woof</ProjectName>
     <RootNamespace>woof</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -15,7 +15,7 @@
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <PackageCertificateKeyFile>woof_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>9130285279D24269C5F41D1A5F32876F556D8DB0</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>2FE71C1CABF62F132CC7153152EDABB98BBBC420</PackageCertificateThumbprint>
     <PackageCertificatePassword>password</PackageCertificatePassword>
   </PropertyGroup>
   <PropertyGroup Label="ReactNativeWindowsProps">
