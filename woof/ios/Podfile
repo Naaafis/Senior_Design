@@ -12,6 +12,8 @@ target 'woof' do
     :hermes_enabled => false
   )
 
+  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+
   target 'woofTests' do
     inherit! :complete
     # Pods for testing
