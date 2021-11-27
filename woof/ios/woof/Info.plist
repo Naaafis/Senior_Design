@@ -20,6 +20,35 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<array>
+	<dict>
+	<key>CFBundleURLSchemes</key>
+	<array>
+	<string>fb136213253812236</string>
+	</array>
+	</dict>
+	<dict>
+	<key>CFBundleTypeRole</key>
+	<string>Editor</string>
+	<key>CFBundleURLName</key>
+	<string>com.googleusercontent.apps.498217439136-rkoa3qu157srfudl86pikkggs2vj26j3</string>
+	<key>CFBundleURLSchemes</key>
+	<array>
+	<string>com.googleusercontent.apps.498217439136-rkoa3qu157srfudl86pikkggs2vj26j3</string>
+	</array>
+	</dict>
+	<dict>
+	<key>CFBundleTypeRole</key>
+	<string>Editor</string>
+	<key>CFBundleURLName</key>
+	<string>project.pbxproj</string>
+	<key>CFBundleURLSchemes</key>
+	<array>
+	<string>project.pbxproj</string>
+	</array>
+	</dict>
+
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
