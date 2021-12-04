@@ -1,0 +1,16 @@
+autoreconf -i -f
+# download shairport sync
+
+./configure --with-alsa --with-pa --with-avahi --with-ssl=openssl --with-systemd --with-metadata --with-soxr
+# what the shairport sync supports
+
+make
+# builds the application
+
+sudo make install
+# assuming the configure settings are in place, the application is installed
+sudo systemctl enable shairport-sync
+# allows running automatically on boot
+
+sudo service shairport-sync start
+# gets shairport sync running 
