@@ -55,6 +55,17 @@ if(process.argv[4] == 0){
 		   });
 		});
 	});
-}		
-	
+}	
 
+
+var exec = require('child_process').exec;
+
+exec('cd C:\\Program Files\ && cd \MySQL\ && cd \MySQL Server\ && cd ./bin/ && mysql -h wo-of.cw6gdxo3gqxo.us-east-2.rds.amazonaws.com -P 3306 -u admin -p',
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });	
+	
