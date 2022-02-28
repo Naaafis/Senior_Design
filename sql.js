@@ -15,7 +15,7 @@ con.connect(function(err) {
         console.log("database woof selected");
     });
 
-    var users = "CREATE TABLE if not exists users (userid VARCHAR(255) PRIMARY KEY, fullname VARCHAR(255), dob DATE, email VARCHAR(255), password VARCHAR(255), dogname VARCHAR(255), datejoined DATETIME);";
+    var users = "CREATE TABLE if not exists users (userid VARCHAR(255) PRIMARY KEY, fullname VARCHAR(255), dob DATE, email VARCHAR(255), password VARCHAR(255), dogname VARCHAR(255), dogbreed VARCHAR(255), about VARCHAR(255), datejoined DATETIME);";
     con.query(users, function(err, result) {
         if (err) throw err;
         console.log("users table created");
@@ -76,7 +76,7 @@ con.connect(function(err) {
         console.log("devices table created");
     });
 
-    var datacollected = "CREATE TABLE if not exists datacollected (deviceid VARCHAR(255), userid VARCHAR(255), accelerometer VARCHAR(255), microphone VARCHAR(255), gps VARCHAR(255), CONSTRAINT uidorder3 FOREIGN KEY (userid) REFERENCES users(userid), CONSTRAINT deviceorder FOREIGN KEY (deviceid) REFERENCES devices(deviceid));";
+    var datacollected = "CREATE TABLE if not exists datacollected (deviceid VARCHAR(255), userid VARCHAR(255), x VARCHAR(255), y VARCHAR(255), z VARCHAR(255), microphone VARCHAR(255), gps VARCHAR(255), CONSTRAINT uidorder3 FOREIGN KEY (userid) REFERENCES users(userid), CONSTRAINT deviceorder FOREIGN KEY (deviceid) REFERENCES devices(deviceid));";
     con.query(datacollected, function(err, result) {
         if (err) throw err;
         console.log("datacollected table created");
