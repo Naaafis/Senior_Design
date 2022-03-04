@@ -1,0 +1,41 @@
+const express = require("express");
+const bp = require("body-parser");
+const db = require("mariadb");
+const PORT = process.env.PORT || 3000;
+
+const app = express();
+
+const pool = db.createPool({
+	host: 'woofs.cm3lizor7esf.us-east-2.rds.amazonaws.com',
+	user: 'admin',
+	password: 'monmon10!',
+	connectionLimit: 5
+});
+
+pool.getConnection()
+	.then(conn => {
+	conn.query("SELECT 1 as val")
+	.then((rows) => {
+	console.log(rows);
+	return conn.query("INSERT INTO users value (?,?)",[1,"mariadb"]);
+	})
+	.then((res) => {
+	console.log(res);
+	conn.end();
+	})
+
+app.use(bp.json())
+app.use(bp.urlencoded({extended: true}))
+
+app.get("/api", (req,res) => {
+	res.json({message: "Hello from server!"});
+});
+
+app.post("/profile",(req,res) => {
+	res.send({message: "Received profile information. Thanks!"});
+console.log(req.body)
+});
+
+app.listen(PORT, () => {
+	console.log('Server listening on ${PORT}');
+});

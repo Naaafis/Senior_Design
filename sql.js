@@ -1,14 +1,19 @@
 const mysql =  require('mysql');
 
 const con = mysql.createConnection({
-    host: "wo-of.cw6gdxo3gqxo.us-east-2.rds.amazonaws.com",
+    host: "woofs.cm3lizor7esf.us-east-2.rds.amazonaws.com",
     user: "admin",
     password: "monmon10!"
 });
 
 con.connect(function(err) {
     if(err) throw err;
-    console.log("Connected to MySQL server endpoint wo-of!");
+    console.log("Connected to MySQL server endpoint woofs!");
+    var createdb = "CREATE DATABASE if not exists woof;"
+    con.query(createdb, function(err, result) {
+        if (err) throw err;
+        console.log("database woof selected");
+    });
     var selectdatabase = "USE woof;"
     con.query(selectdatabase, function(err, result) {
         if (err) throw err;
@@ -81,7 +86,7 @@ con.connect(function(err) {
         if (err) throw err;
         console.log("datacollected table created");
     });
-
+    /*
     var date;
     date = new Date();
     date = date.getUTCFullYear() + '-' +
@@ -100,6 +105,7 @@ con.connect(function(err) {
         ['2022-01-31 22:34:40', 10,10,10],
         ['2022-01-31 22:34:41', 10,10,10]
     ];
+    
 
     // execute the insert statment
     con.query(stmt, [todos], (err, results, fields) => {
@@ -109,6 +115,7 @@ con.connect(function(err) {
     // get inserted rows
     console.log('Row inserted:' + results.affectedRows);
     });
+    */
     
     con.end();
 });
