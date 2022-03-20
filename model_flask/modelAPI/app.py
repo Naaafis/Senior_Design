@@ -90,16 +90,25 @@ print_prediction(filename)
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+import json 
+import requests
+
+url = 'http://18.219.228.229:3000/classification'
 
 @app.route('/predict', methods=['POST'])
 def predict():
     audio_data = request.files['file']
+    name = request.form['username']
     # query_df = pd.DataFrame(json_)
     # query = pd.get_dummies(query_df)
 
     #classifier = joblib.load('classifier.pkl')
     prediction = print_prediction(audio_data)
+    content = {'prediction': prediction, 'username': name}
+    req = requests.post(url, json=content)
+    
     return jsonify({'prediction': prediction})
+
 
 
 if __name__ == '__main__':
