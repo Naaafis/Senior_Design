@@ -30,11 +30,11 @@ app.post("/receive_classification", (req, res) => {
 	res.json({message: result[0]["prediction"]});
 	});
 });
-app.post("/check_match", (req, res) => {
-	var check = "SELECT x.username, y.username FROM friends x, friends y WHERE x.username=y.pending AND x.pending=y.username;";
+app.get("/check_match", (req, res) => {
+	var check = "INSERT INTO friends(username, friendslist) SELECT x.username, x.pending FROM friends x, friends y WHERE x.username=y.pending AND y.username=x.pending AND x.pending!='' AND y.pending!='';";
 	pool.query(check, function(err, result) {
 	if(err) throw err;
-	res.json({message: result[0]["friendslist"]});
+	res.json({message: result[0]});
 	});
 });
 app.post("/friends", (req,res) => {
