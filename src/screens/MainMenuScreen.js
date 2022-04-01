@@ -4,15 +4,22 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 
 export const MainMenuScreen = (props) => {
   const navigation = useNavigation();
-  const {nameOfFriend} = props.route.params;
+  const {userName, email, nameName, dogName} = props.route.params;
 
+  // <Text>{JSON.stringify(nameOfFriend)}</Text>
+  // <Text>{nameOfFriend}</Text>
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <Text style={style.title}>Main Menu</Text>
-      <Text>{JSON.stringify(nameOfFriend)}</Text>
-      <Text>{nameOfFriend}</Text>
+      
+
+      <Text>{userName}</Text>
+      <Text>{email}</Text>
+      <Text>{nameName}</Text>
+      <Text>{dogName}</Text>
+
       <View style={{marginTop: 40}}></View>
-      <Button title="Profile" onPress={() => navigation.push('Profile' , {userName: 'hello', nameOfFriend: nameOfFriend,})} />
+      <Button title="Profile" onPress={() => navigation.push('Profile' , {userName, email, nameName, dogName})} />
       <View style={{marginTop: 20}}></View>
       <Button title="Friends" onPress={() => navigation.push('Friends')} />
       <View style={{marginTop: 20}}></View>
