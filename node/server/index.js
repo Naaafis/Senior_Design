@@ -34,8 +34,9 @@ app.get("/check_match", (req, res) => {
 	var check = "INSERT INTO friends(username, friendslist) SELECT x.username, x.pending FROM friends x, friends y WHERE x.username=y.pending AND y.username=x.pending AND x.pending!='' AND y.pending!='';";
 	pool.query(check, function(err, result) {
 	if(err) throw err;
+	if(check)
 	res.json({message: result[0]});
-	});
+	});	
 });
 app.post("/friends", (req,res) => {
 	res.json({friends: res.body});
@@ -46,6 +47,39 @@ app.post("/friends", (req,res) => {
 	console.log("Inserted");
 	});
 });
+app.post("/get_friends", (req,res) => {
+	var get = "SELECT friendslist FROM friends WHERE username='"+req.body["username"]+"' AND friendslist!='';";
+	pool.query(get, function(err, result) {
+	if(err) throw err;
+	const arr = [];
+	console.log("Fetched");
+	for(let i = 0; i < result.length; i++) {
+		arr.push(result[i]["friendslist"]);	
+	}
+	res.json(arr);
+	console.log(arr);
+	});
+});
+app.get("/delete_pending", (req,res) => {
+	var del = "DELETE x,y FROM friends x, friends y WHERE x.username IN(SELECT implicitTemp.username FROM (SELECT x.username WHERE x.username=y.pending AND y.username=x.pending AND x.pending!='' AND y.pending!='') implicitTemp);";
+	pool.query(del, function(err, result) {
+	if(err) throw err;
+	console.log("Executed delete newly added friends from pending");
+	});
+});
+app.post("/get_profile", (req,res) => {
+	var get = "SELECT * FROM users WHERE username='"+req.body["username"]+"';";
+	pool.query(get, function(err, result) {
+	if(err) throw err;
+	const arr = []
+	console.log("Fetched profile");
+	for(let i = 0; i < result.length; i++) {
+		arr.push(result[i]);
+	}
+	res.json(arr);
+	console.log(arr);
+	});
+}); 
 app.post("/classification", (req, res) => {
 	res.json({classification: res.body});
 	console.log(req.body);
@@ -54,6 +88,20 @@ app.post("/classification", (req, res) => {
 	pool.query(insdata, function(err, result) {
 	if(err) throw err;
 	console.log("inserted");
+	});
+});
+app.post("/check_if_user_exists", (req, res) => {
+	var check = "SELECT username FROM users WHERE abt IS NOT NULL AND username='"+req.body["username"]+"';";
+	pool.query(check, function(err, result) {
+	if(err) throw err;	
+	console.log(result);
+	if(!result[0]) {
+		console.log("user does not exist");
+		res.json("user does not exist");
+	} else{
+		console.log(req.body.username);
+		res.json(req.body.username);
+	}
 	});
 });
 app.post("/profile",(req,res) => {
