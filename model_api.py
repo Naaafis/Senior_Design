@@ -74,32 +74,34 @@ yy = to_categorical(le.fit_transform(y))
 
 filename = 'bark.wav'
 
-print_prediction(filename)
+#print_prediction(filename)
 
 filename = 'engine.wav'
 
-print_prediction(filename)
+#print_prediction(filename)
 
 filename = 'gun_shot.wav'
 
-print_prediction(filename)
+#print_prediction(filename)
 
 
 #turn it into a flask api
-# from flask import Flask
+from flask import Flask
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     json_ = request.json
-#     query_df = pd.DataFrame(json_)
-#     query = pd.get_dummies(query_df)
+@app.route('/predict', methods=['POST'])
+def predict():
+    json_ = request.json
+    query_df = pd.DataFrame(json_)
+    query = pd.get_dummies(query_df)
 
-#     #classifier = joblib.load('classifier.pkl')
-#     prediction = classifier.predict(query)
-#     return jsonify({'prediction': list(prediction)})
+    #classifier = joblib.load('classifier.pkl')
+    prediction = classifier.predict(query)
+    return jsonify({'prediction': list(prediction)})
 
 
-# if __name__ == '__main__':
-#      app.run(port=8080)
+if __name__ == '__main__':
+     app.run(port=8080)
+     
+     

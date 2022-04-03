@@ -1,4 +1,4 @@
-import IPython.display as ipd
+#import IPython.display as ipd
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
@@ -22,11 +22,30 @@ from tensorflow.keras.utils import to_categorical
 from keras.saving import saving_utils
 #from keras.saving import pickle_utils
 
+import numpy as np
+from keras.models import Sequential
+from keras.layers import LSTM
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Convolution1D, MaxPooling1D
+from tensorflow.keras.optimizers import Adam
+from keras.utils import np_utils
+from sklearn import metrics 
+
+# import numpy as np
+# %matplotlib inline
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+import tensorflow as tf
+tf.compat.v1.set_random_seed(2019)
+
 model_name = "local-dog-bark-detection-model"
 
-model = keras.models.load_model('/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/model')
+model = keras.models.load_model('/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/model2')
 
-import librosa
+model.build(input_shape=(40,))
+model.summary()
+
+
 import numpy as np
 
 def extract_feature(file_name):
@@ -37,10 +56,12 @@ def extract_feature(file_name):
         mfccsscaled = np.mean(mfccs.T,axis=0)
         
     except Exception as e:
-        print("Error encountered while parsing file: ", file_name)
+        print("Error encountered while parsing file: ", file)
         return None, None
 
     return np.array([mfccsscaled])
+
+
 
 def print_prediction(file_name):
     prediction_feature = extract_feature(file_name)
@@ -57,7 +78,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.utils import to_categorical
 
-metadata = pd.read_csv('/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/UrbanSound8K.csv')
+metadata = pd.read_csv('/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/BarkClassification.csv')
 features = []
 for index, row in metadata.iterrows():
 
@@ -77,11 +98,11 @@ filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/
 
 print_prediction(filename)
 
-filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/engine.wav'
+filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/growl.wav'
 
 print_prediction(filename)
 
-filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/gun_shot.wav'
+filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/whine.wav'
 
 print_prediction(filename)
 
@@ -97,17 +118,34 @@ url = 'http://18.219.228.229:3000/classification'
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    audio_data = request.files['file']
-    name = request.form['username']
+    audio_data = request.files["'data'"]
+    print(audio_data)
+    print('hello')
+    # print(request.get_json())
+    # d = request.get_json()
+    # print(d['username'])
+    #name = request.get_json['username']
     # query_df = pd.DataFrame(json_)
     # query = pd.get_dummies(query_df)
-
-    #classifier = joblib.load('classifier.pkl')
-    prediction = print_prediction(audio_data)
-    content = {'prediction': prediction, 'username': name}
-    req = requests.post(url, json=content)
     
-    return jsonify({'prediction': prediction})
+    #classifier = joblib.load('classifier.pkl')
+    print_prediction(audio_data)
+    #content = {'prediction': prediction, 'username': name}
+    #req = requests.post(url, json=content)
+    #print(prediction)
+    
+    return "OK!"
+    
+
+@app.route('/gps', methods=['POST'])
+def gps():
+    d = request.get_json()
+    longitude = d['Longitude']
+    latitude = d['Latitude']
+    print("longitude: ", longitude)
+    print("latitude: ", latitude)
+    
+    return "OK!"
 
 
 
