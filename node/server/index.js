@@ -24,10 +24,54 @@ app.get("/api", (req,res) => {
 
 app.post("/receive_classification", (req, res) => {
 	console.log("Connected to MySQL");
-	var readdat = "SELECT username, prediction FROM datacollected WHERE username='"+req.body["dogname"]+"';";
+	var readdat = "SELECT username, prediction FROM datacollected WHERE username='"+req.body["username"]+"';";
 	pool.query(readdat, function(err, result) {
 	if(err) throw err;
-	res.json({message: result[0]["prediction"]});
+	const arr = []
+	for(let i = 0; i < result.length; i++) {
+		arr.push(result[i]["prediction"]);
+	}
+	res.json(arr);
+	console.log(arr);
+	});
+});
+app.post("/ins_pred", (req, res) => {
+	var inspred = "INSERT INTO datacollected(prediction) VALUES('"+req.body["prediction"]+"') WHERE username='"+req.body["username"]+"';";
+	pool.query(inspred, function(err, result) {
+	if(err) throw err;
+	res.json(result[0]);
+	console.log(result[0]);
+	});
+});
+app.post("/rec_user", (req,res) => {
+	var insrec = "INSERT INTO datacollected(username, recommendeduser) VALUES('"+req.body["username"]+"', '"+req.body["recommendeduser"]+"');";
+	pool.query(insrec, function(err, result) {
+	if(err) throw err;
+	res.json({message: result[0]});
+	console.log("inserted recommended user, recommendation for user");
+	});
+});
+app.post("/rec_rec", (req, res) => {
+	var recrec = "INSERT INTO datacollected(recommendation) VALUES('"+req.body["recommendation"]+"') WHERE username='"+req.body["username"]+"' AND recommendeduser='"+req.body["recommendeduser"]+"';";
+	pool.query(recrec, function(err, result) {
+	if(err) throw err;
+	res.json({message: result[0]});
+	console.log("inserted recommendation for recommended user");
+	});
+});
+app.post("/get_recs", (req, res) => {
+	var getrec = "SELECT recommendeduser, recommendation FROM datacollected WHERE username='"+req.body["username"]+"';";
+	pool.query(getrec, function(err, result) {
+	if(err) throw err;
+	const arr = []
+	console.log(result);
+	for(let i = 0; i < result.length; i++) {
+		if(result[i]["recommendation"] === "friendly"){
+			arr.push({title: result[i]["recommendeduser"]});
+	}
+	}
+	res.json(arr);
+	console.log(arr);
 	});
 });
 app.get("/check_match", (req, res) => {
@@ -104,6 +148,14 @@ app.post("/check_if_user_exists", (req, res) => {
 	}
 	});
 });
+app.post("/update_gps", (req, res) => {
+	var gps = "UPDATE datacollected SET gps='"+req.body["gps"]+"' WHERE username='"+req.body["username"]+"';";
+	pool.query(gps, function(err, result) {
+	if(err) throw err;
+	console.log("updated gps for" + result);
+	});
+});
+	
 app.post("/profile",(req,res) => {
 	res.send({message: "Received profile information. Thanks!"});
 	console.log(req.body);
