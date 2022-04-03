@@ -15,7 +15,9 @@ import {List,ListItem, Avatar } from 'react-native-elements';
 
 class Messages extends Component {
   render() {
-    const {messages} = this.props;
+    const {messages,currentMember,userName} = this.props;
+
+    console.log('hellooo' + userName);
     const renderItem = ({item}) => { 
       return (
       <View>
@@ -40,7 +42,7 @@ class Messages extends Component {
         ListEmptyComponent={myListEmpty}
         ListHeaderComponent={() => (
           <Text style={{ fontSize: 30, textAlign: "center",marginTop:20,fontWeight:'bold' }}>
-            Happy Chatting!!
+            Happy Chatting!! {userName}
           </Text>
         )}
       />
@@ -50,7 +52,7 @@ class Messages extends Component {
 
   renderMessage(message){
     const { member, text } = message;
-    console.log(member.username);
+    console.log('this is the members username' + member.username);
     console.log(text);
     const { currentMember } = this.props;
     const messageFromMe = member.id === currentMember.id;

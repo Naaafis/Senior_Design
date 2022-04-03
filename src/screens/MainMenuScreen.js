@@ -25,14 +25,16 @@ export const MainMenuScreen = (props) => {
       <View style={{marginTop: 20}}></View>
       <Button
         title="Add Friends"
-        onPress={() => navigation.push('Add Friends')}
+        onPress={() => navigation.push('Add Friends' , {userName, email, nameName, dogName})}
       />
       <View style={{marginTop: 20}}></View>
       <Button title="Map" onPress={() => navigation.push('Map')} />
       <View style={{marginTop: 20}}></View>
-      <Button title="Chat" onPress={() => navigation.push('Chat')} />
+      <Button title="Chat" onPress={() => navigation.push('Chat' , {userName, email, nameName, dogName})} />
       <View style={{marginTop: 20}}></View>
       <Button title="Logout" onPress={() => navigation.navigate('Home')} />
+      <View style={{marginTop: 20}}></View>
+      <Button title="Update" onPress={() => navigation.navigate('Pending Friends' , {userName, email, nameName, dogName})} />
     </View>
   );
 };

@@ -181,7 +181,7 @@ class ChatScreen extends Component {
       }, //add new one here
     ],
     member: {
-      username: randomName(),
+      username: '',
       color: randomColor(),
       id: 125, //added this just for dev so that the ID is different right off of the bat, remove later.
     },
@@ -207,6 +207,9 @@ class ChatScreen extends Component {
       this.setState({messages});
     });
   }
+  onComponentMount(){
+    this.setState({member: {username: userName}});
+  }
 
   onSendMessage = message => {
     this.drone.publish({
@@ -226,11 +229,14 @@ class ChatScreen extends Component {
   };
 
   render() {
+    const {userName, email, nameName, dogName} = this.props.route.params;
+    
     return (
       <View style={styles.App}>
         <Messages
           messages={this.state.messages}
           currentMember={this.state.member}
+          userName = {userName}
         />
         <Input onSendMessage={this.onSendMessage} />
       </View>

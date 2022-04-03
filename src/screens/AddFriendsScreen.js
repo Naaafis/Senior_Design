@@ -1,11 +1,17 @@
 import React, {Component, useState} from 'react';
 import {View, Text, Button, StyleSheet, TextInput} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import { Searchbar } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Pending from '../screens/PendingFriends';
 
 function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
+
 class AddFriendsScreen extends Component {
+  
   constructor(props){
     super(props);
     this.state = {
@@ -139,40 +145,34 @@ class AddFriendsScreen extends Component {
   //     disbled5: true,
   //   });
   // };
-
+  
   render() {
-
+    const {userName, email, nameName, dogName} = this.props.route.params;
+    console.log('add frieds screen' + userName);
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text style={style.title}>Add Friends </Text>
-        <TextInput
-          placeholder="TYPE MESSAGE HERE"
-          value = {this.state.searchName}
-          onChangeText={this.searchNameChange}
-          autoFocus = {true}
-        />
-        <Button
-          title = "See User's Friends"
-          onPress= {() => this.getInfoOnUsersFriends(this.state.searchName)}
-          color='blue'
-        />
-        <Button
-          title = "Add Friends"
-          onPress= {() => this.addFriend(this.state.searchName)}
-          color='blue'
-        />
-        <Button
-          title = "Check Friends"
-          onPress= {() => this.checkFriend(this.state.searchName)}
-          color='blue'
-        />
-        <Button
-          title = "Delete Friends"
-          onPress= {() => this.deleteFriend(this.state.searchName)}
-          color='blue'
-        />
-        <Button title="Back" onPress={() => this.props.navigation.goBack()} />
+      <View >
+        
+          <Text style={style.title}>Add Friends </Text>
+          <TextInput
+            placeholder="TYPE MESSAGE HERE"
+            value = {this.state.searchName}
+            onChangeText={this.searchNameChange}
+            autoFocus = {true}
+          />
+          <Button
+            title = "See User's Friends"
+            onPress= {() => this.getInfoOnUsersFriends(this.state.searchName)}
+            color='blue'
+          />
+          <Button
+            title = "Add Friends"
+            onPress= {() => this.addFriend(this.state.searchName)}
+            color='blue'
+          />
+          <Button title="Back" onPress={() => this.props.navigation.goBack()} />
 
+          <Text>Recommended Friends</Text>
+          <Pending nameOfUser = {userName}/>
       </View>
     );
   }
@@ -190,5 +190,6 @@ const style = StyleSheet.create({
     marginRight: 40,
     fontSize: 22,
     backgroundColor: 'lightgreen',
-  }
+  },
+  
 });

@@ -55,7 +55,7 @@ class Index extends Component {
       body: JSON.stringify(
         {
         fullname: this.state.nameName,
-        username: "hihihi",
+        username: this.state.userName,
         dob: this.state.dob,
         email: this.state.email,
         dogname: this.state.dogName,
@@ -89,7 +89,7 @@ class Index extends Component {
       body: JSON.stringify(
         {
         fullname: nameName,
-        username: "hihihi",
+        username: userName,
         dob: this.state.dob,
         email: email,
         dogname: dogName,
@@ -148,11 +148,15 @@ class Index extends Component {
     
   // }
 
+  //replaced code after the ternary operator s
+  
+
 
   render() {
     const {navigation} = this.props;
     
-    const flag = this.state.userExists ;
+    const flag = this.state.userExists ; // should be this commented out if not connected to server
+
     console.log('Flag' + flag);
     console.log('Abt:' + this.state.abt);
 
@@ -162,72 +166,65 @@ class Index extends Component {
 
    //onPress={() => navigation.navigate('Main Menu', {nameOfFriend: this.state.userName})}
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
-        {flag ? (
+      <View>
+        {flag ? ( 
           <View>
-            <Text>Hello</Text>
+          <Text>You have already registered the remaining part of your profile page. Enjoy the rest of the application!</Text>
+          <Button
+            title="Go to Main Menu"
+            onPress={() => navigation.navigate('Main Menu', this.state)}
+          />
+        </View>
+          
+          
+        ) : (
+          <View style={{alignItems: 'center'}}>
+            <Text style={{marginTop: 20, marginBottom: 200, fontSize: 48, alignItems:'center'}}>Welcome! Please enter some more info and enjoy WOOF!</Text>
+            
+            <Text>userName: {this.state.userName}</Text>
+            <Text>email: {this.state.email}</Text>
+            <Text>nameName: {this.state.nameName}</Text>
+            <Text>dogName: {this.state.dogName}</Text>
+            <Text >DOB (yyyy-mm-dd)</Text>
+
+            <TextInput
+              placeholder="Enter your date of birth here"
+              value = {this.state.dob}
+              onChangeText = {this.dobChange}
+            />
+            <Text>Dog Breed</Text>
+            <TextInput
+              placeholder="Enter your dogbreed here" 
+              value = {this.state.dog_breed}
+              onChangeText = {this.dog_breedChange}
+            />
+            <Text>About Section</Text>
+            <TextInput
+              placeholder="Enter your description here" 
+              value = {this.state.abt}
+              onChangeText = {this.abtChange}
+            />
+            <Button
+              title = "Register"
+              onPress= {() => (navigation.navigate('Main Menu', this.state),this.sendToServer(this.state.name), this.setState({registeredFlag: true, rand: 'hello'}))}
+              color='blue'
+            />
             <Button
               title="Go to Main Menu"
               onPress={() => navigation.navigate('Main Menu', this.state)}
             />
+            <Text
+              onPress={signOut}
+              style={{
+                width: '100%',
+                textAlign: 'center',
+                color: 'red',
+                fontSize: 20,
+              }}>
+              Sign out
+            </Text>
           </View>
-          
-        ) : (
-          <View >
-          <Text style={{marginTop: 20, marginBottom: 200, fontSize: 48}}>
-          Home
-        </Text>
-        <Text>userName: {this.state.userName}</Text>
-        <Text>email: {this.state.email}</Text>
-        <Text>nameName: {this.state.nameName}</Text>
-        <Text>dogName: {this.state.dogName}</Text>
-        
-        <Text style={style.label}>DOB (yyyy-mm-dd)</Text>
-        <TextInput
-          style={style.label}
-          placeholder="Enter your date of birth here"
-          value = {this.state.dob}
-          onChangeText = {this.dobChange}
-        />
-        <Text style={style.label}>Dog Breed</Text>
-        <TextInput
-          style={style.label}
-          placeholder="Enter your dogbreed here" 
-          value = {this.state.dog_breed}
-          onChangeText = {this.dog_breedChange}
-        />
-        <Text style={style.label}>About Section</Text>
-        <TextInput
-          style={style.label}
-          placeholder="Enter your description here" 
-          value = {this.state.abt}
-          onChangeText = {this.abtChange}
-        />
-
-        <Button
-          title = "Register"
-          onPress= {() => (navigation.navigate('Main Menu', this.state),this.sendToServer(this.state.name), this.setState({registeredFlag: true, rand: 'hello'}))}
-          color='blue'
-        />
-
-        <Button
-          title="Go to Main Menu"
-          onPress={() => navigation.navigate('Main Menu', this.state)}
-        />
-        <Text
-          onPress={signOut}
-          style={{
-            width: '100%',
-            textAlign: 'center',
-            color: 'red',
-            marginTop: 200,
-            fontSize: 20,
-          }}>
-          Sign out
-        </Text>
-        </View>
         )}
-        
       </View>
     );
   }

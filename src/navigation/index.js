@@ -17,6 +17,7 @@ import {FriendsScreen} from '../screens/FriendsScreen';
 import {AddFriendsScreen} from '../screens/AddFriendsScreen';
 import {MapScreen} from '../screens/MapScreen';
 import {ChatScreen} from '../screens/ChatScreen';
+import PendingScreen from '../screens/PendingFriends';
 
 const Stack = createNativeStackNavigator();
 const test = "helloWorld";
@@ -83,6 +84,7 @@ const Navigation = () => {
             <Stack.Screen name="Add Friends" component={AddFriendsScreen} />
             <Stack.Screen name="Map" component={MapScreen} />
             <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="Pending Friends" component={PendingScreen} />
           </>
       ) : (
           <>
