@@ -1,6 +1,12 @@
 # Senior_Design
 > cd node/server/
+
+<br/>
+
 > node ./index.js
+
+<br/>
+
 > /api
 Checks if we may successfully connect to the node server on EC2 via a get request
 
