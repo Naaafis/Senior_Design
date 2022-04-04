@@ -98,7 +98,7 @@ app.post("/get_friends", (req,res) => {
 	const arr = [];
 	console.log("Fetched");
 	for(let i = 0; i < result.length; i++) {
-		arr.push(result[i]["friendslist"]);	
+		arr.push({title: result[i]["friendslist"]});	
 	}
 	res.json(arr);
 	console.log(arr);
@@ -153,6 +153,19 @@ app.post("/update_gps", (req, res) => {
 	pool.query(gps, function(err, result) {
 	if(err) throw err;
 	console.log("updated gps for" + result);
+	});
+});
+app.post("/get_gps", (req, res) => {
+	var gps = "SELECT gps FROM datacollected WHERE username='"+req.body["username"]+"';";
+	pool.query(gps, function(err, result) {
+	if(err) throw err;
+	console.log("grabbed gps from user");
+	
+	let hat = result;
+	const arr = (hat[0]["gps"].split(','));
+	let a = parseInt(arr[0]);
+	let b = parseInt(arr[1]);
+	res.json({name: req.body.username, longitude: a, latitude: b});
 	});
 });
 	
