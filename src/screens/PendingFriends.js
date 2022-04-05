@@ -1,3 +1,4 @@
+import { AWS_CLOUDWATCH_PROVIDER_NAME } from '@aws-amplify/core';
 import React, { Component } from 'react';
 
 import {
@@ -35,6 +36,7 @@ class PendingFriends extends Component {
     getListViewItem = (item) => {  
         console.log('trying to add my friend' + item);
         this.addFriend(item);
+        Alert.alert('You have added ' + item + ' to your pending friends list!');
     }  
 
     fetchFriends(e){
@@ -150,11 +152,11 @@ class PendingFriends extends Component {
     {
         const {nameOfUser} = this.props;
         console.log('testing' + nameOfUser);
-          const Item = ({ title }) => (
-            <View >
-              <Text onPress={this.getListViewItem.bind(this, title)}>{title}</Text>
-            </View>
-          );
+        const Item = ({ title }) => (
+        <View >
+            <Text style={style.body} onPress={this.getListViewItem.bind(this, title)}>{title}</Text>
+        </View>
+        );
 
             const renderedItem = ({item}) => (
                 <Item title={item.title}/>
@@ -173,7 +175,6 @@ class PendingFriends extends Component {
             <FlatList
                 data={this.state.data}
                 renderItem={renderedItem}
-        
             />
       </SafeAreaView>
     );
@@ -208,7 +209,14 @@ const style = StyleSheet.create({
       backgroundColor: "rgba(0,0,0,0.5)",
       marginLeft: 10,
       marginRight: 10,
-    }
+    },
+    body: {
+        marginTop: 3,
+        fontFamily: 'Sarpanch-Regular',
+        fontSize: 20,
+        color: 'black',
+        alignSelf: 'center'
+      },
   });
 
 

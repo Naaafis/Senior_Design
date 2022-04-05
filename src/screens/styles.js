@@ -31,12 +31,13 @@ export default StyleSheet.create({
       flexDirection: "row-reverse",
       justifyContent: "flex-end",
       // textAlign: "right",
-      // alignItems: "flex-end"
+      alignItems: "flex-end",
+      alignSelf: 'flex-end',
     },
     Message_content: { display: 'flex' },
     Message_content_current: {
-      alignItems: "flex-end" ,
-      
+      // alignItems: "flex-end" ,
+      alignSelf: 'flex-end',
     },
     Messages_message_avatar: {
       height: 35,
@@ -68,6 +69,7 @@ export default StyleSheet.create({
       backgroundColor: 'orangered',
       color: 'white',
       display: 'flex',
+      alignSelf: 'flex-end',
     },
     form: {
       display: "flex",
@@ -94,7 +96,40 @@ export default StyleSheet.create({
       borderRadius: 8,
       marginLeft: 10,
     },
+    screen: {
+      flex: 1,
+      backgroundColor: 'darksalmon',
+    },
+    title: {
+      marginTop: 5,
+      alignSelf: 'center',
+      fontFamily: 'Sarpanch-ExtraBold',
+      fontSize: 60,
+      color: 'yellow',
+    },
+    body: {
+      marginTop: 30,
+      minWidth: 300,
+      fontFamily: 'Sarpanch-Bold',
+      fontSize: 36,
+      color: 'black',
+      backgroundColor: 'lightgreen',
+    },
+    buttonContainer: {
+      alignSelf: 'center',
+      marginTop: 12,
+      minWidth: 300,
+      elevation: 10,
+      backgroundColor: '#009688',
+      borderRadius: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+    },
+    buttonText: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: '#fff',
+      alignSelf: 'center',
+      textTransform: 'uppercase',
+    },
   });
-
-
-

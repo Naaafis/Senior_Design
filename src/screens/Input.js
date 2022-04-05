@@ -1,6 +1,6 @@
 import {Component} from "react";
 import React from "react";
-import { View,TextInput, Text,FlatList,SafeAreaView, StyleSheet, Button, onPress, Alert} from "react-native";
+import { View,TextInput, Text,FlatList,SafeAreaView, StyleSheet, Button, onPress, Alert,TouchableOpacity} from "react-native";
 import styles from "./styles";
 
 class Input extends Component {
@@ -13,12 +13,17 @@ class Input extends Component {
   }
   
   nameChange(name) {
-    this.setState({name});
+    this.setState({name}); 
   }
   
   onSubmit(e) {
     this.setState({name: ""});
-    this.props.onSendMessage(this.state.name);
+    if (this.state.name === ''){
+      Alert.alert('Please send a NON-EMPTY message :)');
+    }else{
+      this.props.onSendMessage(this.state.name);
+    }
+    
   }
   
   render() {
@@ -31,11 +36,13 @@ class Input extends Component {
           onChangeText={this.nameChange}
           autoFocus = {true}
         />
-        <Button 
-          style = {styles.button}
-          title="Send" 
-          onPress = {() => this.onSubmit(this.state.name)}
-        />
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => this.onSubmit(this.state.name)}>
+          <Text style={styles.buttonText}>Send</Text>
+        </TouchableOpacity>
+        
+        
       </View>
     );
   }

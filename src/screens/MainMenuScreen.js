@@ -1,51 +1,114 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/core';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-export const MainMenuScreen = (props) => {
+const MainMenuScreen = props => {
   const navigation = useNavigation();
   const {userName, email, nameName, dogName} = props.route.params;
 
   // <Text>{JSON.stringify(nameOfFriend)}</Text>
   // <Text>{nameOfFriend}</Text>
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <Text style={style.title}>Main Menu</Text>
-      
+    <View style={styles.screen}>
+      <Text style={styles.title}>Main Menu</Text>
 
+      {/*
       <Text>{userName}</Text>
       <Text>{email}</Text>
       <Text>{nameName}</Text>
       <Text>{dogName}</Text>
+      */}
 
-      <View style={{marginTop: 40}}></View>
-      <Button title="Profile" onPress={() => navigation.push('Profile' , {userName, email, nameName, dogName})} />
-      <View style={{marginTop: 20}}></View>
-      <Button title="Friends" onPress={() => navigation.push('Friends')} />
-      <View style={{marginTop: 20}}></View>
-      <Button
-        title="Add Friends"
-        onPress={() => navigation.push('Add Friends' , {userName, email, nameName, dogName})}
-      />
-      <View style={{marginTop: 20}}></View>
-      <Button title="Map" onPress={() => navigation.push('Map')} />
-      <View style={{marginTop: 20}}></View>
-      <Button title="Chat" onPress={() => navigation.push('Chat' , {userName, email, nameName, dogName})} />
-      <View style={{marginTop: 20}}></View>
-      <Button title="Logout" onPress={() => navigation.navigate('Home')} />
-      <View style={{marginTop: 20}}></View>
-      <Button title="Update" onPress={() => navigation.navigate('Pending Friends' , {userName, email, nameName, dogName})} />
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() =>
+          navigation.push('Profile', {userName, email, nameName, dogName})
+        }>
+        <Text style={styles.buttonText}>Profile</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => navigation.push('Friends', {userName, email, nameName, dogName})}>
+        <Text style={styles.buttonText}>Friends</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() =>
+          navigation.push('Add Friends', {userName, email, nameName, dogName})
+        }>
+        <Text style={styles.buttonText}>Add Friends</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => navigation.push('Map', {userName, email, nameName, dogName})}>
+        <Text style={styles.buttonText}>Map</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() =>
+          navigation.push('Chat', {userName, email, nameName, dogName})}>
+        <Text style={styles.buttonText}>Chat</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.buttonText}>Logout</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() =>
+          navigation.navigate('Pending Friends', {
+            userName,
+            email,
+            nameName,
+            dogName,
+          })
+        }>
+        <Text style={styles.buttonText}>Update</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const style = StyleSheet.create({
-  title: {
-    marginTop: 20,
-    marginBottom: 20,
-    fontSize: 48,
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'darksalmon',
   },
-  buttonStyle: {
-    padding: 20,
+  title: {
+    marginTop: 10,
+    fontFamily: 'Sarpanch-ExtraBold',
+    fontSize: 60,
+    color: 'yellow',
+  },
+  body: {
+    fontFamily: 'Sarpanch-Bold',
+    fontSize: 24,
+    color: 'black',
+  },
+  buttonContainer: {
+    marginTop: 28,
+    minWidth: 300,
+    elevation: 10,
+    backgroundColor: '#009688',
+    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
   },
 });
+
+export {MainMenuScreen};
