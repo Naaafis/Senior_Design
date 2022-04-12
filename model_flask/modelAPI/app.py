@@ -94,10 +94,6 @@ le = LabelEncoder()
 yy = to_categorical(le.fit_transform(y))
 
 
-filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/bark.wav'
-
-print_prediction(filename)
-
 filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/modelAPI/growl.wav'
 
 print_prediction(filename)
@@ -114,36 +110,71 @@ app = Flask(__name__)
 import json 
 import requests
 
-url = 'http://18.219.228.229:3000/classification'
+url_gps = 'http://18.219.228.229:3000/update_gps'
+url_user = 'http://18.219.228.229:3000/rec_user'
+url_pred = 'http://18.219.228.229:3000/rec_rec'
+
+counter_user = 0
+counter_pred = 0
+
+@app.route('/user', methods=['POST'])
+#counter_user = 0
+def user():
+    print(request.get_json())
+    d = request.get_json()
+    print(d['recommendeduser'])
+    name = request.get_json['recommendeduser']
+    # name = "pegasus"
+    print(name)
+    
+    content = {'recommendeduser': name, 'username': 'dshimon1', 'counter': counter_user}
+    counter_user = counter_user + 1
+    req = requests.post(url_user, json=content)
+    print(req.text)
+    return "OK!"
 
 @app.route('/predict', methods=['POST'])
+#counter_pred = 0
 def predict():
-    audio_data = request.files["'data'"]
-    print(audio_data)
-    print('hello')
-    # print(request.get_json())
-    # d = request.get_json()
-    # print(d['username'])
-    #name = request.get_json['username']
-    # query_df = pd.DataFrame(json_)
-    # query = pd.get_dummies(query_df)
-    
-    #classifier = joblib.load('classifier.pkl')
-    print_prediction(audio_data)
-    #content = {'prediction': prediction, 'username': name}
-    #req = requests.post(url, json=content)
-    #print(prediction)
-    
+    print(request.form)
+    #print(request.files)
+        
+    filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/recording.wav'
+    #print_prediction(filename)
+    prediction = print_prediction(filename)
+    content = {'recommendation': prediction, 'username': 'dshimon1', 'counter' : counter_pred}
+    counter_pred = counter_pred + 1
+    #req = requests.post(url_pred, json=content)
+
     return "OK!"
     
 
 @app.route('/gps', methods=['POST'])
 def gps():
+    
+    # if request.args.get("Longitude"):
+    #     longitude = request.args.get("Longitude")
+    #     latitude = request.args.get("Latitude")
+    #     print(longitude)
+    #     print(latitude)
+    #     coords2 = "-62.10284565282228,42.34854035"
+        
+    #     # content = {'longitude': longitude, 'latitude': latitude, 'username': 'dshimon1'}
+    #     content = {'gps' : coords2, 'username': 'dshimon1'}
+    #     req = requests.post(url_gps, json=content)
+    #     print(req.text)
+    #     return "OK!"
+                
     d = request.get_json()
     longitude = d['Longitude']
     latitude = d['Latitude']
     print("longitude: ", longitude)
     print("latitude: ", latitude)
+    coords = str(longitude) + ',' + str(latitude)
+    coords2 = "-71.10284565282228,45.34854035"
+    content = {'gps': coords2, 'username': 'dshimon1', 'recommendeduser': 'Fluffy'}
+    req = requests.post(url_gps, json=content)
+    print(req.text)
     
     return "OK!"
 
