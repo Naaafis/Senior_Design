@@ -103,6 +103,20 @@ filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/
 print_prediction(filename)
 
 
+counter_user = -1
+counter_pred = -1
+
+def inc_counter_user():
+    global counter_user
+    clunter_user += 1
+    return counter_user
+
+def inc_counter_pred():
+    global counter_pred
+    counter_pred += 1
+    return counter_pred
+
+
 #turn it into a flask api
 from flask import Flask, request, jsonify
 
@@ -114,21 +128,18 @@ url_gps = 'http://18.219.228.229:3000/update_gps'
 url_user = 'http://18.219.228.229:3000/rec_user'
 url_pred = 'http://18.219.228.229:3000/rec_rec'
 
-counter_user = 0
-counter_pred = 0
-
 @app.route('/user', methods=['POST'])
 #counter_user = 0
 def user():
-    print(request.get_json())
+    #print(request.get_json())
     d = request.get_json()
-    print(d['recommendeduser'])
-    name = request.get_json['recommendeduser']
+
+    name = d['recommendeduser']
     # name = "pegasus"
     print(name)
     
-    content = {'recommendeduser': name, 'username': 'dshimon1', 'counter': counter_user}
-    counter_user = counter_user + 1
+    #send_counter_user = inc_counter_user()
+    content = {'recommendeduser': name, 'username': 'dshimon1', 'count': 0}
     req = requests.post(url_user, json=content)
     print(req.text)
     return "OK!"
@@ -142,9 +153,16 @@ def predict():
     filename = '/Users/cheffbcookin/Desktop/Senior Design/Senior_Design/model_flask/recording.wav'
     #print_prediction(filename)
     prediction = print_prediction(filename)
-    content = {'recommendation': prediction, 'username': 'dshimon1', 'counter' : counter_pred}
-    counter_pred = counter_pred + 1
-    #req = requests.post(url_pred, json=content)
+    
+    #send_counter_pred = inc_counter_pred()
+    rec = ''
+    if prediction == 'whine' or prediction == 'growl':
+        rec = 'hostile'
+    else:
+        rec = 'friendly'
+        
+    content = {'recommendation': rec, 'username': 'dshimon1', 'count' : 0}
+    req = requests.post(url_pred, json=content)
 
     return "OK!"
     
@@ -171,7 +189,7 @@ def gps():
     print("longitude: ", longitude)
     print("latitude: ", latitude)
     coords = str(longitude) + ',' + str(latitude)
-    coords2 = "-71.10284565282228,45.34854035"
+    coords2 = "-71.10687527887521,42.349334716796875"
     content = {'gps': coords2, 'username': 'dshimon1', 'recommendeduser': 'Fluffy'}
     req = requests.post(url_gps, json=content)
     print(req.text)
