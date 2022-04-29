@@ -34,7 +34,7 @@ This screen displays the Map Component of our application. It displays the userâ
 ### /src/screens/styles.js
 The chat screen allows users to message their friends. It utilizes Scaledrone to store these messages and display them nicely to each user. Scaledrone stores the message as well as the user's name and id. This is how the UI is able to retrieve new messages from Scaledrone and understand which user sent these messages. The messages are displayed using the FlatList in Messages.js and the Input is retrieved from the textbox in the Input.js file. 
 
-### node/server/index.js SQL functions are as follows:
+### backend/node/server/index.js SQL functions are as follows:
 /api -- Checks if we may successfully connect to the node server on EC2 via a get request
 /receive_classification -- Selects username and prediction from data collected table, searched by an input username via a post request
 /ins_pred -- Inserts a prediction into the data collected table based on an input username via a post request
