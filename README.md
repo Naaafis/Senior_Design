@@ -18,7 +18,7 @@ Woof is an ideal cross-platform social media application for dog owners. Rather 
 
 #### Audio Recording / Passing Values
 
-............................................................................................................................................................................................................................................................................................................................................................
+There were many challenges that we faced in regards to each of the necessary modules. Primarily, with recording audio, it took months to find an optimal solution, which was using the I2S protocol with the IMNP441 microphone. Prior to this, I spent many hours trying to configure several analog microphones. This was a serious setback, because converting analog to digital signals and then finding a way to put this into a .wav file proved rather difficult. With the ESP32, we were limited in our ability to process analog signals. The best we could come up with was getting a graph of different voltage signals that were supposedly indicative of sound waves. However, this told us nothing about the interaction between two dogs, as voltage spikes on a graph aren’t exactly the best measuring tool. 
 ### Software
 
 #### API ML Model
