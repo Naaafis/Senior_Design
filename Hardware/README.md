@@ -2,3 +2,4 @@
 Repository for storing code for our Senior Design Project:
 Social media application that leverages information from dog-tag to make ”friend” recommendations
 
+- tileAPI.py: code to retrieve locations from TILE device in API format 
