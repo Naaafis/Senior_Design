@@ -27,7 +27,17 @@ There were many challenges that we faced in regards to each of the necessary mod
 ............................................................................................................................................................................................................................................................................................................................................................
 #### Passing Username Variables from Authentication to UI
 
-............................................................................................................................................................................................................................................................................................................................................................
+A big challenge we faced was passing data through the Authentication / Sign in component of the application to the rest of the Social Media Application. This is because using an outside authenticator means that the flow of information through through JS files is different. Instead of passing parameters through the navigation for example, we had to access the Amplify Authentication user info to access user information. 
+
+#### Working with Asynchronous Functions for Maps
+Maps was originally configured to work as a node seperate node file to the React Native Application. Once all of the functions used for the Prototype Map component were brought in to the Main Application, there were multiple issues when trying to fetch data from the database and run functions based on the result of these functions. This is because fetch works asynchronously and the functions being used in between fetch calls were synchronous. We ended up finding a workaround by calling these synchronous functions within the asynchronous functions. 
+
+#### Scaledrone Limitations
+Due to only having limited space and usage of Scaledrone, this limited the amount we were able to work and develop using Scaledrone, without having to create new instances, new channels, and reconfiguring the servers as well as the front-end to work with these new instances. This only starting occurring once we ramped up testing of the Maps component with many friends.
+
+#### GPS Location
+One of the main issues we faced and struggled to solve for the duration of the project was how to retrieve the Dog's location in real time. This meant we would need cellular connection in order to send our GPS Data out of the ESP-32 Microncontroller. We were not able to come up with a solution using cellular, however a very solid solution we came up with was to use a Tile Tracker. This Tile Tracker is based on BLE where it can pinpoint users' locations based on detection of other BLE devices in the area. Because our server will always be up to receive location changes, we were able to utilize Python Libraries to retreive the coordinates of the Tracker.
+
 #### Passing Values Between Servers
 
 ............................................................................................................................................................................................................................................................................................................................................................
