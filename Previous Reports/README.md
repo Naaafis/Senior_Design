@@ -12,4 +12,5 @@ This folder holds all of our previous documentations, which includes:
 - First Semester Report
 - Critical design review slides
 - User's manual
-- Poster 
+- Poster
+- Team Contract
