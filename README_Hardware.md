@@ -52,7 +52,7 @@ To play the WAV file you will need to download the file to the SPIFFS file syste
 
 ________________________________________________________________________
 
-# Senior_Design-BLE NOTES (Built in BLE on ESP32)
+# Hardware Report-BLE NOTES (Built in BLE on ESP32)
 
 <img width="622" alt="Screen Shot 2022-04-29 at 12 46 51 PM" src="https://user-images.githubusercontent.com/75186655/165988131-ceb95922-0e1c-4c98-9ce4-5689573669e0.png">
 WE setup the ESP32 as a client and as a server. This means we need two different sketches and we will go over them one after the other.It is important to note that the code for this project will be written using the Arduino IDE and it will be impossible to upload the code if your IDE does not have the ESP 32 Arduino board package installed. Once you have the board files installed, it will automatically load several ESP 32 libraries to the Arduino IDE. The libraries comprises of functions and declarations that make sending data through a complex protocol (at least more complex when compared with serial) like the BLE easy.
@@ -66,6 +66,15 @@ ______________________________________________________________________________
 Hardware Report-  GPS/GSM NOTES - GSM Module
 
 Bluetooth and GPS trackers differ in many ways. In general, GPS trackers maintain a constant connection via satellite and provide real-time tracking. Bluetooth trackers work within a shorter range and are dependent on a connection to a Bluetooth enabled device. Bluetooth trackers typically cost less, are lighter and use less power. In this project, we utilize both to optimize finding location under various circumstances. The built in GSM module utilizes Bluetooth, and has 250 ft or 75m range. However, as with all wireless technologies, different environments impact the effective range of Bluetooth signals. If your device is out of Bluetooth range, you can check its last known location on the app. This information is automatically updated whenever anyone in the GSM community comes within Bluetooth range of your GSM. All location and user information is secure and used exclusively for finding accuracy. We do not sell any user data.
+<img width="324" alt="Screen Shot 2022-04-29 at 5 30 02 PM" src="https://user-images.githubusercontent.com/75186655/166071703-d8d766ba-de3f-4c72-ab56-677a3de33fbd.png">
+
+_______________________________________________________________________________
+**Hardware Report - Power Notes (Microcontroller+sensors)**
+
+The Woof! Jacket is first powered using 3 AAA batteries. Three standard AAA batteries produce approximately 4.5v when fully charged. The load is 0.5 watts. Watts=amps x volts, so 0.5 watts at 4.5 volts is about 110 milliamps, or .11 amps. An average AAA alkaline battery contains about 1000 milliamp-hours, so, therefore, the batteries would last a maximum of 9.09 straight hours of use, assuming perfect conditions. In reality, you can probably deduct about an hour from that rating, as the battery will not be 100% efficient as it becomes discharged. The wattage will remain the same, so as the voltage of the battery drops towards the end of its runtime, the amperage will increase, thus draining the battery faster. Therefore,  one can  estimate that 7–8 hours of usage is how long it will take to drain the battery.  Once the batteries are inserted into the battery pocket of the jacket, and the battery pocket is sealed,  the Woof! jacket is to be  safely placed onto the dog. Please ensure that the velcros are secure and the jacket is firmly fitted. Once the jacket is on the dog, open up the Woof! application and sign in to your account. 
+
+![image](https://user-images.githubusercontent.com/75186655/166071924-9e2c4b9f-c84b-41ce-8038-072e49a4fbad.png)
+
 _______________________________________________________________________________
 **OVERVIEW**
 
@@ -81,5 +90,6 @@ _**GPS ASSEMBLY INSTRUCTIONS**_
 When working with IoT, it’s often necessary to track a device’s location for monitoring. Global Positioning Service (GPS) remains the number 1 option for large-area tracking. 
 ___________________________________________________________________________
 **BILL OF MATERIALS / VENDOR INFORMATION
-<img width="549" alt="Screen Shot 2022-04-29 at 1 17 56 PM" src="https://user-images.githubusercontent.com/75186655/165992406-bda1c8fd-406d-4240-a0cd-da6fa289a2e4.png">
+<img width="549" alt="Screen Shot 2022-04-29 at 1 17 56 PM" src="https://user-images.githubusercontent.com/75186655/165992406-bda1c8fd-406d-4240-a0cd-da6fa289a2e4.png">![Uploading Screen Shot 2022-04-29 at 5.26.56 PM.png…]()
+__________________________________________________________
 **
