@@ -1,0 +1,6 @@
+module Pods_finalProjectSeniorDesign_finalProjectSeniorDesignTests {
+  umbrella header "Pods-finalProjectSeniorDesign-finalProjectSeniorDesignTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

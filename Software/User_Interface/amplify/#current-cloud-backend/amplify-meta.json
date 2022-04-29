@@ -1,0 +1,57 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-authentication-staging-200650-authRole",
+      "UnauthRoleArn": "arn:aws:iam::006961196461:role/amplify-authentication-staging-200650-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::006961196461:role/amplify-authentication-staging-200650-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-authentication-staging-200650-deployment",
+      "UnauthRoleName": "amplify-authentication-staging-200650-unauthRole",
+      "StackName": "amplify-authentication-staging-200650",
+      "StackId": "arn:aws:cloudformation:us-east-1:006961196461:stack/amplify-authentication-staging-200650/9c51acc0-aa1b-11ec-8e7d-120c1161aa1d",
+      "AmplifyAppId": "d275day4yr7k0d"
+    }
+  },
+  "auth": {
+    "Authentication": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-authentication-staging-200650-deployment/amplify-cfn-templates/auth/Authentication-cloudformation-template.json",
+        "logicalId": "authAuthentication"
+      },
+      "lastPushTimeStamp": "2022-03-22T20:29:51.974Z",
+      "output": {
+        "UserPoolId": "us-east-1_DlZbf5XzL",
+        "AppClientIDWeb": "7nthvlg7nalanrs4c5rq6688uu",
+        "AppClientID": "6pg4irj6qi3e503sb8c64qute3",
+        "IdentityPoolId": "us-east-1:577f1d6c-0e26-4801-8406-db586bf3b5ca",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:006961196461:userpool/us-east-1_DlZbf5XzL",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "Authentication"
+      },
+      "lastPushDirHash": "47tpdwpBE3J9P/cJtUpu6coyAnY="
+    }
+  }
+}
