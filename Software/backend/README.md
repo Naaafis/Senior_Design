@@ -8,6 +8,7 @@ Social media application that leverages information from dog-tag to make ”frie
 <br/>
 
 > node ./index.js
+Starts the backend server such that SQL requests may be made to it
 
 <br/>
 
