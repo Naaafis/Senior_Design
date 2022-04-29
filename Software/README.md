@@ -36,6 +36,12 @@ The chat screen allows users to message their friends. It utilizes Scaledrone to
 
 ## Flow Chart
 
+![Woof_2nd_Prototype_User_Interface_Flow_3](https://user-images.githubusercontent.com/50089669/166080639-f22f19b1-e007-4d22-be75-336cd1a34724.PNG)
+
+![Woof_1st_Semester_v3_6](https://user-images.githubusercontent.com/50089669/166080622-5829b7f5-d870-433d-aae6-c53c6ef6e08f.PNG)
+
+<img width="468" alt="Screen Shot 2022-04-29 at 7 31 38 PM" src="https://user-images.githubusercontent.com/50089669/166080659-5bd6e414-c054-4672-ba8e-d0708eeb5c3d.png">
+
 ## Dev/Build Tools
 Visual Studio Code - Version: 1.66
 
