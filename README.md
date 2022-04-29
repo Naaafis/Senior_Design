@@ -25,6 +25,10 @@ There were many challenges that we faced in regards to each of the necessary mod
 #### API ML Model
 
 ............................................................................................................................................................................................................................................................................................................................................................
+
+#### Integration
+Integration of all of the different components we were working on was an issue we kept facing throughout the duration of our project. Our new projects seemed to reject these new modules and didn't work well with different dependencies throughout the building process. We figured out the reason why this occurred midway through the year and were able to seamlessly integrate our changing components from this point on.
+
 #### Passing Username Variables from Authentication to UI
 
 A big challenge we faced was passing data through the Authentication / Sign in component of the application to the rest of the Social Media Application. This is because using an outside authenticator means that the flow of information through through JS files is different. Instead of passing parameters through the navigation for example, we had to access the Amplify Authentication user info to access user information. 
