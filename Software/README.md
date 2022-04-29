@@ -37,10 +37,10 @@ The chat screen allows users to message their friends. It utilizes Scaledrone to
 ## Flow Chart
 
 ## Dev/Build Tools
-Visual Studio Code 
-Version: 1.66
-Xcode 
-Version: 13.2.1
+Visual Studio Code - Version: 1.66
+
+Xcode - Version: 13.2.1
+
 React Native CLI (Client Line Interface)
 React Native Packages (all included in the node modules)
 npm install @react-navigation/native react-native-screens
@@ -56,8 +56,7 @@ npm install scaledrone-react-native
 npm install react-native-elements
 npm install react-native-maps
 
-Metro - Development Platform
-Version: 0.70.2
+Metro - Development Platform - Version: 0.70.2
 
 ## How to install project from scratch:
 
