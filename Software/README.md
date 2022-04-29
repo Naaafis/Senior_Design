@@ -34,6 +34,26 @@ This screen displays the Map Component of our application. It displays the user�
 ### /src/screens/styles.js
 The chat screen allows users to message their friends. It utilizes Scaledrone to store these messages and display them nicely to each user. Scaledrone stores the message as well as the user's name and id. This is how the UI is able to retrieve new messages from Scaledrone and understand which user sent these messages. The messages are displayed using the FlatList in Messages.js and the Input is retrieved from the textbox in the Input.js file. 
 
+### node/server/index.js SQL functions are as follows:
+/api -- Checks if we may successfully connect to the node server on EC2 via a get request
+/receive_classification -- Selects username and prediction from data collected table, searched by an input username via a post request
+/ins_pred -- Inserts a prediction into the data collected table based on an input username via a post request
+/rec_user -- Inserts a recommended user given an input username into the data collected table via a post request
+/rec_rec -- Inserts a recommendation of hostile/friendly into the data collected table based on an input username and the associated recommended user via a post request
+/get_recs -- Selects all recommended users and their associated recommendations from the data collected table based on an input username and if the recommendation is deemed friendly via a post request
+/check_match -- Inserts a new row into the friends table and updates the friends list column if two users are mutually pending as friends via a get request
+/friends -- Inserts a new row into the friends table given an input username and a new pending friend request made by the user via a post request
+/get_friends -- Returns the friends list given an input username where the friends list must not be empty in the friends table via a post request
+/delete_pending -- Deletes any users which were mutually pending as friends from the friends table, this function is called after get_friends such that the table is not clogged with friends that are mutually pending via a get request because mutually pending friends are added to each other’s friends lists
+/get_profile -- Returns every field associated with an input username’s profile to print the whole profile on the profile screen of the front end via a post request
+/classification -- Inserts every available input field into the data collected table via a post request
+/check_if_user_exists -- Returns true if the user exists in the users table given an input username via a post request
+/update_gps -- Updates the GPS column’s coordinates for every instance of an input username to the data collected table via a post request
+/get_gps -- Returns the GPS to be sent to the front end of the application given an input username, splits the single column by “,” into longitude and latitude via a post request
+/profile -- Inserts every available input field into the users table via a post request
+
+The backend scalendrone.js is necessary to run in order to send GPS coordinates between the sensor on the hardware to the back end, to Scalendrone for the chat rooms, and finally to the front end. Scalendrone.js authenticates to Scalendrone for sending to the chat rooms, and queries the database to match all friends, making them eligible to join the same chat rooms. 	
+
 ## Flow Chart
 
 ![Woof_2nd_Prototype_User_Interface_Flow_3](https://user-images.githubusercontent.com/50089669/166080639-f22f19b1-e007-4d22-be75-336cd1a34724.PNG)
@@ -66,6 +86,9 @@ Metro - Development Platform - Version: 0.70.2
 
 ## How to install project from scratch:
 
+### EC2 Server setup
+To recreate our EC2 server, first create an elastic IP address in the AWS console. Then, create one VPC to be shared between a private security group and a public security group. Next, create a public and private subnet, each will correspond to a public or private security group. The next step is to create a public and a private security group associated with its corresponding public or private subnet. Then, create an EC2 server with the storage size set to a minimum size mini, have it associated with the VPC created earlier and elastic IP, and associate it to a public security group with its associated public subnet. Finally, create an AWS RDS MySQL instance, and associate it with the private security group with its associated private subnet. The EC2 server needs to have custom inbound and outbound rules to support whitelisting requests made from the IP of the hardware. The hardware’s IP address needs to have the ports 3306 for MySQL, 22 for SSH, and 80 for HTTPS/HTTP. These ports need both 0.0.0.0/0 for IPv4, and ::/0 for IPv6. The final step is to clone this repository on EC2, after which, change the working directory to inside software/backend, then change directory to node/server, and run node ./index.js for npm start to start the server such that requests from the front-end can populate the backend with user data. Storing this data is essential to our product because it allows for the transfer of login information between the various pages/screens, and for saving the information for future login sessions. 
+
 Note: These instructions are for development on macOS deploying the application to an iPhone. For instructions on how to develop on other environments, please refer to https://reactnative.dev/docs/environment-setup
 
 ### Dependencies
@@ -78,6 +101,14 @@ Install Command Line Tools in Xcode
 Preferences → Locations → select most recent version in CLI dropdown
 Install Cocoapods
 sudo gem install cocoapods
+Install NVM to install node on EC2
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+Install node
+nvm install node
+node -e "console.log('Running Node.js ' + process.version)"
+Install MySQL command line for the server script
+sudo apt install mysql-server
 
 ### Run Project on Emulator
 Download the UI Folder from GitHub
