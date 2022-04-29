@@ -9,7 +9,8 @@ Woof is an ideal cross-platform social media application for dog owners. Rather 
 
 ## Current State of Project
 
-............................................................................................................................................................................................................................................................................................................................................................
+Our project met the requirements that we set out to achieve. The User Interface code runs smoothly, with the CSS styling and other creative touches such as button animation and downloaded custom text completed. The User Interface utilizes a fully completed authentication system using AWS Amplify. It verifies emails using verification codes and registers new users into AWS Amplify as well as our SQL database. Our Hardware Sensors can run consistently, and the data is successfully sent to our Machine Learning Model, which classifies between howls, growls, bark, and whines with 82%+ accuracy. This classification is crucial for our recommended friend’s feature. After the recommendations go through our SQL database, the mobile User Interface will recommend other dogs that had a positive interaction with your dog. Below, we highlighted some of the challenges and obstacles we faced in this project so you don’t have to.
+
 ## Technical Challenges we Faced
 ### Hardware
 #### Battery
