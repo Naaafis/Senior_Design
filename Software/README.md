@@ -1,6 +1,6 @@
 # Software Readme
 
-##Overview of Software Modules
+## Overview of Software Modules
 ### App.js
 Packages the entire application using AWS Amplify in order to use their Authentication features
 
@@ -55,6 +55,7 @@ npm install aws-amplify aws-amplify-react-native amazon-cognito-identity-js @rea
 npm install scaledrone-react-native
 npm install react-native-elements
 npm install react-native-maps
+
 Metro - Development Platform
 Version: 0.70.2
 
