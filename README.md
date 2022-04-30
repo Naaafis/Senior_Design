@@ -47,5 +47,4 @@ One of the main issues we faced and struggled to solve for the duration of the p
 ### Connecting to MySQL 
 MySQL via a command line or through a cloud server both allowed for querying the previously generated MySQL tables. It was difficult to make sure that SQL could read in variables send from the front end, but learning the '"+req.body["variable"]+"' allowed for passing in the inputs from the front end in the form fields. Hosting MySQL on EC2 allowed for an indirect connection in which the credentials are masked and not exposed directly, so the variables may be passed with the aformentioned req.body format.
 
-### Passing Values Between Servers
 
