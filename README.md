@@ -42,6 +42,9 @@ Due to only having limited space and usage of Scaledrone, this limited the amoun
 #### GPS Location
 One of the main issues we faced and struggled to solve for the duration of the project was how to retrieve the Dog's location in real time. This meant we would need cellular connection in order to send our GPS Data out of the ESP-32 Microncontroller. We were not able to come up with a solution using cellular, however a very solid solution we came up with was to use a Tile Tracker. This Tile Tracker is based on BLE where it can pinpoint users' locations based on detection of other BLE devices in the area. Because our server will always be up to receive location changes, we were able to utilize Python Libraries to retreive the coordinates of the Tracker.
 
+#### Connecting to MySQL 
+MySQL via a command line or through a cloud server both allowed for querying the previously generated MySQL tables. It was difficult to make sure that SQL could read in variables send from the front end, but learning the '"+req.body["variable"]+"' allowed for passing in the inputs from the front end in the form fields. Hosting MySQL on EC2 allowed for an indirect connection in which the credentials are masked and not exposed directly, so the variables may be passed with the aformentioned req.body format.
+
 #### Passing Values Between Servers
 
 ............................................................................................................................................................................................................................................................................................................................................................
