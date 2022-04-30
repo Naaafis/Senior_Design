@@ -14,7 +14,7 @@ Our project met the requirements that we set out to achieve. The User Interface 
 ## Technical Challenges we Faced
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-### Hardware
+## Hardware
 
 ### Audio Recording / Passing Values
 
@@ -24,9 +24,10 @@ One of the main challenges in regards to processing our audio data was sending i
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-### Software
+## Software
 
 ### API ML Model
+The biggest challange for the ML model was deciding what kind of data we want for our recommender system. We had considered using proximity and duration of close proximity as a metric, but training such a model would require us to have actual dogs present with accelerometers. We ended up choosing an audio based model which came with its own issues. We had to find a way to filter the dog_sounds and our initial method of doing so involved a seperate model to classify urban sounds. Unfortunately that model misclassified much of our required dog_sounds as other noises, and was unusable. Our mitigation for this issue was to only record audio when we can ensure that BLE signals came from other dogs nearby, as we could ensure that any recorded noise likely stemmed from dogs. Our last issue was improving the accuracy of such model as we spent a significant amount of time collecting more and more audio in order to meet the 80% requirement. We also had to heavily the tweak the layers of the model in order to meet our desired accuracy. 
 
 ### Integration
 Integration of all of the different components we were working on was an issue we kept facing throughout the duration of our project. Our new projects seemed to reject these new modules and didn't work well with different dependencies throughout the building process. We figured out the reason why this occurred midway through the year and were able to seamlessly integrate our changing components from this point on.
