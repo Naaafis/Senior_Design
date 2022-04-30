@@ -15,16 +15,18 @@ Our project met the requirements that we set out to achieve. The User Interface 
 ### Hardware
 #### Battery
 
-............................................................................................................................................................................................................................................................................................................................................................
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 #### Audio Recording / Passing Values
 
 There were many challenges that we faced in regards to each of the necessary modules. Primarily, with recording audio, it took months to find an optimal solution, which was using the I2S protocol with the IMNP441 microphone. Prior to this, I spent many hours trying to configure several analog microphones. This was a serious setback, because converting analog to digital signals and then finding a way to put this into a .wav file proved rather difficult. With the ESP32, we were limited in our ability to process analog signals. The best we could come up with was getting a graph of different voltage signals that were supposedly indicative of sound waves. However, this told us nothing about the interaction between two dogs, as voltage spikes on a graph aren’t exactly the best measuring tool. 
+
+One of the main challenges in regards to processing our audio data was sending it out from the ESP32. This proved difficult at first due to our approach of uploading the sound file to the SPIFFS ESP32 file system, and then creating another server hosted by the ESP32 to download the contents of the file, and play it back. Our initial approach was to send the file directly from the generated server to a Flask API that contained the Machine Learning model, however, this failed. This is because the generated server could not send its data to another server. Thus, we eventually found a solution, which was to utilize the ESP’s FreeRTOS feature to simultaneously connect the ESP32 to the internet and send the .wav file after recording. This solution not only took quite a while to implement, but it also took a while to gravitate away from sending the data from the ESP’s generated server. Due to the fact that we had a working solution in downloading the file, this was the approach we worked with for some time.  
 ### Software
 
 #### API ML Model
 
-............................................................................................................................................................................................................................................................................................................................................................
+---------------------------------------------------------------------------------------------------------------------------------------------------
 
 #### Integration
 Integration of all of the different components we were working on was an issue we kept facing throughout the duration of our project. Our new projects seemed to reject these new modules and didn't work well with different dependencies throughout the building process. We figured out the reason why this occurred midway through the year and were able to seamlessly integrate our changing components from this point on.
@@ -46,6 +48,4 @@ One of the main issues we faced and struggled to solve for the duration of the p
 MySQL via a command line or through a cloud server both allowed for querying the previously generated MySQL tables. It was difficult to make sure that SQL could read in variables send from the front end, but learning the '"+req.body["variable"]+"' allowed for passing in the inputs from the front end in the form fields. Hosting MySQL on EC2 allowed for an indirect connection in which the credentials are masked and not exposed directly, so the variables may be passed with the aformentioned req.body format.
 
 #### Passing Values Between Servers
-
-............................................................................................................................................................................................................................................................................................................................................................
 
