@@ -116,6 +116,8 @@ Xcode - Version: 13.2.1
 
 React Native CLI (Client Line Interface)
 React Native Packages (all included in the node modules)
+
+```bash
 npm install @react-navigation/native react-native-screens
 npm install react-native-safe-areacontext
 npm install react-navigation @react-native-community/masked-view
@@ -128,10 +130,46 @@ npm install aws-amplify aws-amplify-react-native amazon-cognito-identity-js @rea
 npm install scaledrone-react-native
 npm install react-native-elements
 npm install react-native-maps
+```
 
 Metro - Development Platform - Version: 0.70.2
 
+[packages]
+keras = "==2.6.0"
+matplotlib = "*"
+numpy = "*"
+librosa = "*"
+pandas = "*"
+boto3 = "*"
+tensorflow = "*"
+pipenv = "*"
+Flask = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+
 ## How to install project from scratch:
+### ML model API setup (Also used for receiving GPS)
+The API is used for receiving GPS information, and providing predictions to incoming audio files. The model has already been trainined using the ML_Model/train_model.py file. Bootstrapping the API allows for the use of the following urls: /url, /gps and /predict which is preceded by the link running the ML FLASK API. Any incoming audio is redirected to this API using the ML_Model/model_flask/intermediate.js file. This file saves incoming auio to the server and invokes /predict to run the model on this saved file. The /user link is used to retreive the recommended user information, as it is invoked at the same time as the prediction API. Lastly, the /gps endpoint is invoked directly from our hardware to receive GPS information. All three of these APIs forwards its information directly to our node server described in the following section. 
+
+To run the APIs:
+
+Change directory to ML_Model/model_flask
+- run following commands 
+
+```bash 
+pip install pipenv
+pipenv --three
+pipenv install flask 
+./bootstrap.sh
+```
+
+In a different terminal run:
+```bash
+node intermediate.js
+```
 
 ### EC2 Server setup
 To recreate our EC2 server, first create an elastic IP address in the AWS console. Then, create one VPC to be shared between a private security group and a public security group. Next, create a public and private subnet, each will correspond to a public or private security group. The next step is to create a public and a private security group associated with its corresponding public or private subnet. Then, create an EC2 server with the storage size set to a minimum size mini, have it associated with the VPC created earlier and elastic IP, and associate it to a public security group with its associated public subnet. Finally, create an AWS RDS MySQL instance, and associate it with the private security group with its associated private subnet. The EC2 server needs to have custom inbound and outbound rules to support whitelisting requests made from the IP of the hardware. The hardware’s IP address needs to have the ports 3306 for MySQL, 22 for SSH, and 80 for HTTPS/HTTP. These ports need both 0.0.0.0/0 for IPv4, and ::/0 for IPv6. The final step is to clone this repository on EC2, after which, change the working directory to inside software/backend, then change directory to node/server, and run node ./index.js for npm start to start the server such that requests from the front-end can populate the backend with user data. Storing this data is essential to our product because it allows for the transfer of login information between the various pages/screens, and for saving the information for future login sessions. 
@@ -140,33 +178,49 @@ Note: These instructions are for development on macOS deploying the application 
 
 ### Dependencies
 Install Node & Watchman using Homebrew
+```bash
 brew install node
 brew install watchman
+```
 Install Xcode
 Easy to do through the Mac App Store
 Install Command Line Tools in Xcode
 Preferences → Locations → select most recent version in CLI dropdown
 Install Cocoapods
+```bash
 sudo gem install cocoapods
+```
 Install NVM to install node on EC2
+```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 . ~/.nvm/nvm.sh
+```
 Install node
+```bash
 nvm install node
 node -e "console.log('Running Node.js ' + process.version)"
+```
 Install MySQL command line for the server script
+```bash
 sudo apt install mysql-server
+```
 
 ### Run Project on Emulator
 Download the UI Folder from GitHub
 Store file in proper location
 Download dependencies
+```bash
 npm install (in the project directory)
+```
 Open two separate terminals, both in the project’s directory
 Terminal 1: Start Metro Bundler
+```bash
 npx react-native start
+```
 Terminal 2: Run the Project
+```bash
 npx react-native run-ios 
+```
 
 ### Run Project on Device
 Plug in your device through USB-cable
